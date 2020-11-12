@@ -16,6 +16,7 @@
     */
     
     $nome = $_POST['nome'];
+    $imagem = $_POST['imagem'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $conf_senha = $_POST['conf_senha'];
@@ -27,7 +28,7 @@
 
         $conn = mysqli_connect("localhost", "root", "", "sistema");
     
-        $sql = "INSERT INTO usuarios (nome, email, senha) values ('$nome', '$email', '$senha_cripto')";
+        $sql = "INSERT INTO usuarios (nome, imagem, email, senha) values ('$nome', '$imagem', '$email', '$senha_cripto')";
     
         $conn->query($sql);
 

@@ -54,3 +54,12 @@ main{
 .imgen img {
     width: 80%;
 }
+
+@media(max-width: 1024px){
+    .imgen{
+        display: none;
+    }
+    .login {
+        width: 100%;
+    }
+}
