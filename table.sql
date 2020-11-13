@@ -9,3 +9,13 @@ create table usuarios(
 )
 drop table from id = '1';
 select * from usuarios;
+
+CREATE TABLE postagens (
+     id_postagens INT PRIMARY KEY AUTO_INCREMENT,
+     conteudo VARCHAR(400) NOT NULL,
+     /*Llave foranea*/
+     fk_usuario INT NOT NULL,
+     FOREIGN KEY(fk_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+SELECT * FROM postagens;

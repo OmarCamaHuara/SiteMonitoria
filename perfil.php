@@ -4,44 +4,23 @@
     if(!isset($_SESSION['nome'])){
         header('location:index.php');
         exit;
-    }else{
-        $conn = mysqli_connect("localhost", "root", "","sistema");
-
-    $sql = "SELECT * 
-            FROM postagens AS p 
-                JOIN usuarios AS u 
-            WHERE p.fk_usuario = u.id
-            ORDER BY p.id_postagens DESC";
-
-    $result = $conn->query($sql);
-
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/home.css">
+    <title>Perfil</title>
 </head>
 <body>
-    <!--
-        sm = 576
-        md = 768
-        lg = 992
-        xl = 1200
-    -->
-
-    <!-- Cabecalho -->
     <header class="container-fluid border shadow">
         <nav class="row container m-auto">
             <div class="col-10 d-flex align-items-center bg-white">
-
                 <img class="rounded-circle" src="<?php echo $_SESSION['imagem']?>" alt="<?php echo $_SESSION['imagem']?>">
-                <h5 class="ml-3 mb-0"><?php echo $_SESSION['nome'] ?></h5>
+                <h5 class="ml-3 mb-0"><?php echo $_SESSION['nome']?></h5>
             </div>
             <div class="col-2 d-flex align-items-center justify-content-end">
 
@@ -53,37 +32,44 @@
                         <a class="dropdown-item" href="sair.php">Sair</a>
                     </div>
                 </div>
-                
 
             </div>
         </nav>
     </header>
 
-    <!-- Conteudo -->
-
     <main class="container">
-        <form class="form-row mt-5" action="cadastro_postagens.php" method="post">
-            <input class="col-9 form-control" name="post" type="text" placeholder="No que voce esta pensando, <?php echo $_SESSION['nome']?>?">
-            <button class="col-3 btn" name="submit">Publicar</button>
-        </form>
-
-    <?php
-        foreach($result as $postagem){
-    ?>
-
-        <div class="card mt-5">
-            <div class="card-header">
-                <img class="rounded-circle" src="<?php echo $postagem["imagem"]?>" alt="<?php echo $postagem["imagem"]?>">
-                <h5 class="ml-3 mb-0"><?php echo $postagem["nome"] ?></h5>
+        <section class="row pt-5">
+            <div class="col-lg-4">
+                <img class="rounded-circle" style="width:300px; height:300px;" src="<?php echo $_SESSION['imagem']?>" alt="<?php echo $_SESSION['imagem']?>">
             </div>
-            <div class="card-body">
-                <p><?php echo $postagem["conteudo"]?></p>
+            <div class="col-lg-8">
+                <h1><?php echo $_SESSION['nome']?></h1>
+                <p><?php echo $_SESSION['email']?></p>
             </div>
-        </div>
+        </section>
+        <section class="mt-5 border p-5">
+            <div class="alert alert-danger" role="alert">
+                Cuidado!!! ao remover a conta, nao podera ser recuperada
+            </div>
+            <button class="btn btn-danger" onclick="confirmar()">Remover a conta</button>
+        </section>
 
-    <?php } ?>
     </main>
-    
+
+
+    <script>
+        function confirmar(){
+            let confirmacao = confirm("Voce realmente deseja expluir a conta");
+
+            if(confirmacao){
+                // Cuando se quiere pasar un dato get
+                location.href = "remover_conta.php?id=" + <?php echo $_SESSION['id']?>;
+            }
+        }
+    </script>
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

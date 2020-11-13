@@ -12,12 +12,12 @@ if(strlen($email) > 3 && strlen($senha)>3){
     $resultado_consulta = $conn->query("SELECT * from usuarios where email = '$email' AND senha = '$senha'");
 
     // $usuarios recebe a lista de usuários
-    $usuarios = mysqli_fetch_all($resultado_consulta);
+    $usuarios = mysqli_fetch_assoc($resultado_consulta);
 
-    $_SESSION['nome'] = $usuarios[0][1];
-    $_SESSION['imagem'] = $imagem[0][2];
-    $_SESSION['email'] = $usuarios[0][3];
-    $_SESSION['senha'] = $usuarios[0][4];
+    $_SESSION['nome'] = $usuarios["nome"];
+    $_SESSION['imagem'] = $usuarios["imagem"];
+    $_SESSION['email'] = $usuarios["email"];
+    $_SESSION['id'] = $usuarios["id"];
     //echo '<pre>';
     //print_r($usuarios);
     //echo '</pre>';
